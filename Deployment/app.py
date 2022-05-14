@@ -1,14 +1,14 @@
-# Importação de bibliotecas
+# Importing Libraries from Flask framework
 from flask import Flask, render_template
 from routes import bp1
 
-# Criação do aplicativo Flask que vai ser responsável por subir a aplicação em Web.
+# Creation of the Flask application that will be responsible for uploading the application to the Web.
 app = Flask(__name__)
 
-# Linkagem do arquivo routes.py para poder acessar a rota do backend.
+# Linking file routes.py to be able to access the backend route.
 app.register_blueprint(bp1)
 
-# Declaração da rota principal que vai chamar o arquivo de home.html assim que subir a aplicação.
+# Declaration of the main route that will call the home.html file as soon as the application is uploaded.
 
 
 @app.route("/")
@@ -19,7 +19,7 @@ def home():
 if __name__ == '__main__':
     app.run(debug=False)
 
-# Para rodar o programa localmente basta ter o Python instalado
-# e instalar as dependencias, na sequência, abrir um CMD na pasta do projeto
-# e digitar "python app.py", irá abrir um servidor em determinado endereço informado
-# no CMD.
+# To run the program locally, just have Python installed.
+# Install the dependencies, then open a CMD in the project folder
+# and typing "python app.py", it will open a server at a given address
+# in CMD.

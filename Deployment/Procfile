@@ -1,2 +1,2 @@
-# Arquivo responsável para o Deploy da aplicação no Heroku.
+# File responsible for Deploying the application on Heroku.
 web: gunicorn app: app

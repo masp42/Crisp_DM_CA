@@ -1,32 +1,32 @@
-# Importação de bibliotecas
+# Importing libraries
 import pandas as pd
 from flask import Blueprint, request
 import numpy as np
 from joblib import load
 import json
 
-# Carregamento do modelo extraido depois do treinamento.
+# Loading the extracted model after training.
 model = load('models/heart_disease.joblib')
 
-# Declaração de rota do backend com prefixo /main, ou seja, para chamar http://127.0.0:5000/main/api/run_model (localmente).
+# Backend route declaration with /main prefix, i.e. to call http://127.0.0:5000/main/api/run_model (locally).
 bp1 = Blueprint('main', __name__, url_prefix='/main')
 
-# Rota do backend responsável por coletar as informações enviadas pelo frontend.
+# Backend route responsible for collecting the information sent by the frontend.
 
 
 @bp1.route('/api/run_model', methods=['POST'])
 def run_model():
-    # Coleta dos valores da request e criação de DataFrame
+    # Collection of request values ​​and creation of DataFrame
     form_hd_df = pd.DataFrame(request.form, index=[0])
-    # Extração de apenas os valores da tabela, sem seus indices
+    # Extraction of only table values, without their indices
     records_hd = form_hd_df.to_records(index=False)
     results_hd = list(records_hd[0])
-    # Conversão necessaria para ser feita o "predict"
+    # Conversion needed to make the prediction
     results_hd_as_numpy_array = np.asarray(results_hd)
     results_hd_reshaped = results_hd_as_numpy_array.reshape(1, -1)
     predicted = model.predict(results_hd_reshaped)
 
-    # Retorno da função convertendo para String
+    # Function return converting to String
     return {
         'pred': json.dumps(int(predicted[0]))
     }

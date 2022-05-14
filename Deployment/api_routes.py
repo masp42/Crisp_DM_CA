@@ -1,3 +1,4 @@
+# Importing Libraries
 import pandas as pd
 from flask import Blueprint, request
 from services.model_utils import predict_hf
@@ -15,4 +16,4 @@ def run_model():
     return {
         'data': request.form,
         'pred': pred,
-        'message': 'Deu tudo certo'}
+        'message': 'Everything is ok'}
